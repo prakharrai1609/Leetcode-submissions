@@ -6,7 +6,7 @@
 - Hoping I can keep up the pace and go over 1000 leetcode submissions in 2022.<br>
 <h3>Let the coding begin 👨‍💻</h3><br>
 
-<h3 align="center">A passionate frontend developer from India</h3>
+<h3 align="center">A passionate leetcoder from India</h3>
 
 <h3 align="left">Connect with me:</h3>
 <p align="left">
