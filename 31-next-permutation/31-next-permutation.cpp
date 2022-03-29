@@ -16,6 +16,8 @@ public:
             return void(reverse(nums.begin(), nums.end()));
         }
         
+        // now find out the just greater number than the left val and
+        // swap and sort the array!
         for (int i = N - 1; i >= left; i--) {
             if (nums[i] > nums[left]) {
                 right = i;
