@@ -1,3 +1,10 @@
+/*
+Approach:
+- fixing the first row and col to know if the current matrix element should be "0".
+- Once we fix the value, we traverse the array leaving the first row and col for reference for marking the rest of the matrix as 0.
+- Finally we mark row and col as 0 if we find any value 0 in the first row and col!
+*/
+
 class Solution {
 public:
     void setZeroes(vector<vector<int>>& matrix) {
