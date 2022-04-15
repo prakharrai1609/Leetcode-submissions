@@ -12,17 +12,19 @@
 class Solution {
 public:
     TreeNode* trimBST(TreeNode* root, int low, int high) {
-        if(!root) return nullptr;
         
-        if(root->val < low) {
+        if (!root) return root;
+        
+        int data = root->val;
+        
+        if (data < low) {
             return trimBST(root->right, low, high);
-        } else if (root->val > high) {
+        } else if (data > high) {
             return trimBST(root->left, low, high);
+        } else {
+            root->left = trimBST(root->left, low, high);
+            root->right = trimBST(root->right, low, high);
         }
-        
-        root->left = trimBST(root->left, low, high);
-        root->right = trimBST(root->right, low, high);
-        
         return root;
     }
 };
