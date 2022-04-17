@@ -10,18 +10,25 @@
  * };
  */
 class Solution {
-private:
-    int add = 0;
 public:
-    void update(TreeNode* root) {
-        if (!root) return;
-        if (root->right) update(root->right);
+    int sum = 0;
+    /*  Approach
+        - go deep down right
+        - update nodes while going up
+        - node update happens before going left
+    */
+    void update(TreeNode * root) {
+        if (!root) 
+            return;
+        // go right
+        update(root->right);
         
-        add += root->val;
-        root->val = add;
+        sum += root->val;
+        root->val = sum;
         
-        if (root->left) update(root->left);
+        update(root->left);
     }
+    
     TreeNode* convertBST(TreeNode* root) {
         update(root);
         return root;
