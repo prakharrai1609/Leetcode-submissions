@@ -1,11 +1,29 @@
 class Solution {
-private:
-    vector<vector<vector<int>>> dp;
 public:
-    /*
-        m - zero's limit
-        n - one's limit
-    */
+    int findMaxForm(vector<string>& strs, int m, int n) {
+        vector<vector<int>> dp(m + 1, vector<int> (n + 1, 0));
+        
+        for (string s : strs) {
+            int zero = count(s.begin(), s.end(), '0');
+            int one = count(s.begin(), s.end(), '1');
+            
+            for (int i = m; i >= zero; i--) {
+                for (int j = n; j >= one; j--) {
+                    dp[i][j] = max(dp[i][j], 1 + dp[i - zero][j - one]);
+                }
+            }
+        }
+        
+        return dp[m][n];
+    }
+};
+
+
+/*
+
+    RECURSIVE APPROACH
+    ==================
+    
     int subs(const vector<string>& vc, int m, int n, int N) {
         if ((!m and !n) or !N)
             return 0;
@@ -35,4 +53,6 @@ public:
         
         return subs(strs, m, n, N);
     }
-};
+
+
+*/
