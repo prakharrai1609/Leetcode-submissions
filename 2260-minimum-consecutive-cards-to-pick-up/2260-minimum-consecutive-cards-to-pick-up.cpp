@@ -1,6 +1,11 @@
 class Solution {
 public:
     int minimumCardPickup(vector<int>& cards) {
+        /*
+            Approach: 
+            - storing all the indices in the vector
+            - calculating the pair wise minimum
+        */
         map<int, vector<int>> m;
         for (int i = 0; i < cards.size(); i++) {
             m[cards[i]].push_back(i + 1);
