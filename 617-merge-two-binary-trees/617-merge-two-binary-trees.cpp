@@ -23,6 +23,15 @@ public:
     
         return root1;
     }
+    
+    /*
+     * why this works?
+     * because when we go into the else condition, if a particular node 
+       doesn't exist in one tree and exists in another, returning the existing node
+       will return the whole branch of that node i.e. if a node pointer is 
+       returned the whole branch with all the nodes in that branch are returned and connected to
+       the tree.
+    */
 };
 
 /*
