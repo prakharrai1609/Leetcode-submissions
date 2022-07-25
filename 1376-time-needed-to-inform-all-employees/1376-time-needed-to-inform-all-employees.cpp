@@ -2,22 +2,30 @@ class Solution {
     map<int, int> vis;
     int sum = 0, ans = 0;
 public:
+// A little tricky DFS
+
     void dfs(map<int, vector<int>>& m, int src, const vector<int>& it) {
         vis[src] = 1;
         sum += it[src];
         
-        bool isManager = 0;
-        
         for (int nbr : m[src]) {
             if (!vis[nbr]) {
-                isManager = 1;
                 dfs(m, nbr, it);
             }
         }
         
+        ans = max(sum, ans);
         sum -= it[src];
-        if (!isManager) ans = max(sum, ans);
     }
+    
+// SIMPLER DFS
+    
+    // int dfs(map<int, vector<int>>& m, int src, vector<int>& informTime) {
+    //     int mx = 0;
+    //     for (int nbr : m[src]) 
+    //         mx = max(mx, dfs(m, nbr, informTime));
+    //     return mx + informTime[src];
+    // }
     
     int numOfMinutes(int n, int headID, vector<int>& manager, vector<int>& informTime) {
         
