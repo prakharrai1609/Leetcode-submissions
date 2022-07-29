@@ -1,5 +1,7 @@
 class Solution {
 public:
+    // using the concept of next greater element 
+    
     vector<int> dailyTemperatures(vector<int>& T) {
         int N =  size(T);
         vector<int> ans(N, 0);
