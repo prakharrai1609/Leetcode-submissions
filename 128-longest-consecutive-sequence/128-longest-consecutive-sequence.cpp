@@ -6,15 +6,10 @@ public:
         for (int num : s) {
             int t = 0;
             if (s.count(num - 1)) continue;
-            else {
-                int n = num;
-                while (s.count(n)) {
-                    t++;
-                    n++;
-                }
-                len = max(t, len);
-            }
+            while (s.count(num + t)) t++;
+            len = max(t, len);
         }
+
         return len;
     }
 };
