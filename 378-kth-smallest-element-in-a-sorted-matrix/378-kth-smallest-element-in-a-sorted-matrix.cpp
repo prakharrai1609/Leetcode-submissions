@@ -2,7 +2,7 @@ class Solution {
 public:
     int kthSmallest(vector<vector<int>>& M, int k) {
         int N = size(M), row = 0, col = 0;
-        priority_queue<vector<int>, vector<vector<int>>, greater<vector<int>>> q;
+        priority_queue<vector<int>, vector<vector<int>>, greater<>> q;
         
         for (int i = 0; i < min(N, k); i++)
             q.push({M[i][0], i, 0});
