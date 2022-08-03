@@ -1,25 +1,15 @@
 class MyCalendar {
-    vector<vector<int>> dates;
+    set<pair<int, int>> dates;
 public:
     MyCalendar() {}
     
     bool book(int start, int end) {
-        int n = size(dates);
+        auto date = dates.lower_bound({start, end});
         
-        if (n == 0) {
-            dates.push_back({start, end});
-            return true;
-        }
+        if ((date != dates.end() and !(date->first >= end)) or (date != dates.begin() and !(prev(date)->second <= start)))
+            return false;
         
-        for (int i = 0; i < n; i++) {
-            int ds = dates[i][0], de = dates[i][1];
-            if (ds >= end or de <= start) 
-                continue;
-            else 
-                return false;
-        }
-        
-        dates.push_back({start, end});
+        dates.insert({start, end});
         return true;
     }
 };
