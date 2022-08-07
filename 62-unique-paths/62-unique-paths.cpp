@@ -1,17 +1,40 @@
+/*
+ * @lc app=leetcode id=62 lang=cpp
+ *
+ * [62] Unique Paths
+ */
+
+// @lc code=start
+#define ll long long 
+#define vcll vector<ll>
+#define vc vector
+#define endl '\n'
+#define FOR(i, a, b) for (int i = a; i < b; i++)
+
 class Solution {
 public:
     int uniquePaths(int m, int n) {
-        vector<vector<int>> dp(m + 1, vector<int> (n + 1, 0));
-        
-        for (int i = 0; i <= m; ++i) dp[i][n] = 1;
-        for (int j = 0; j <= n; ++j) dp[m][j] = 1;
-        
-        for (int i = m - 1; i >= 1; i--) {
-            for (int j = n - 1; j >= 1; j--) {
-                dp[i][j] = dp[i + 1][j] + dp[i][j + 1];
+        vc<int> arr(n, 1);
+        FOR(i, 1, m) {
+            FOR(j, 1, n) {
+                arr[j] += arr[j - 1];
             }
         }
-        
-        return dp[1][1];
+        return arr[n - 1];
     }
 };
+
+/*
+    int uniquePaths(int m, int n) {
+        vc<int> pre(n, 1), curr(n, 1);
+        FOR(i, 1, m) {
+            FOR(j, 1, n) {
+                curr[j] = curr[j - 1] + pre[j];
+            }
+            swap(curr, pre);
+        }
+        return pre[n - 1];
+    }
+*/
+// @lc code=end
+
