@@ -1,4 +1,7 @@
-/*
+/* 
+    solution 1
+    ==========
+
 class Solution {
     vector<vector<int>> dp;
     unordered_map<string, bool> m;
@@ -25,7 +28,9 @@ public:
         return f(s, 0, 0);   
      }
 };
-*/
+
+    solution 2
+    ==========
 
 class Solution {
     unordered_map<string, bool> m;
@@ -56,18 +61,26 @@ public:
         return f(s, 0);   
      }
 };
+*/
 
-// class Solution {
-//     unordered_map<string, bool> m;
-// public:        
-//     bool wordBreak(string s, vector<string>& wordDict) {
-//         int N = s.length();
-//         vector<vector<int>> dp(N + 1, vector<int> (N + 1));
+class Solution {
+    unordered_map<string, bool> m;
+public:        
+    bool wordBreak(string s, vector<string>& wordDict) {
+        int N = s.length();
+        vector<bool> dp(N + 1, false);
+        for (string word : wordDict) m[word] = 1;
+        dp[0] = true;
         
-//         for (int i = 1; i <= N; i++) {
-//             for (int j = i - 1; j >= 1; j--) {
-                
-//             }
-//         }
-//     }
-// };
+        for (int i = 1; i <= N; i++) {
+            for (int j = i - 1; j >= 0; j--) {
+                if (dp[j] and m[s.substr(j, i - j)]) {
+                    dp[i] = true;
+                    break;
+                }
+            }
+        }
+        
+        return dp[N];
+    }
+};
