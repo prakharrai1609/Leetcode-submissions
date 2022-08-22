@@ -1,3 +1,4 @@
+/*
 class Solution {
     vector<vector<int>> dp;
     unordered_map<string, bool> m;
@@ -24,3 +25,49 @@ public:
         return f(s, 0, 0);   
      }
 };
+*/
+
+class Solution {
+    unordered_map<string, bool> m;
+    vector<int> dp;
+    
+public:
+    bool f(string s, int idx) {
+        if (idx == s.length())
+            return 1;
+        
+        if (dp[idx] != -1)
+            return dp[idx];
+        
+        for (int i = idx + 1; i <= s.length(); i++) {
+            if (m[s.substr(idx, i - idx)]) {
+                bool rec = f(s, i);
+                if (rec)
+                    return dp[idx] = 1;
+            }
+        }
+        
+        return dp[idx] = 0;
+    }
+    
+    bool wordBreak(string s, vector<string>& wordDict) {
+        dp.resize(301, -1);
+        for (string word : wordDict) m[word] = 1;
+        return f(s, 0);   
+     }
+};
+
+// class Solution {
+//     unordered_map<string, bool> m;
+// public:        
+//     bool wordBreak(string s, vector<string>& wordDict) {
+//         int N = s.length();
+//         vector<vector<int>> dp(N + 1, vector<int> (N + 1));
+        
+//         for (int i = 1; i <= N; i++) {
+//             for (int j = i - 1; j >= 1; j--) {
+                
+//             }
+//         }
+//     }
+// };
