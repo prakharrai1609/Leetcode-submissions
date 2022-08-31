@@ -1,19 +1,19 @@
 class Solution {
     int R, C;
     bool pacific, atlantic;
-    map<pair<int, int>, bool> found;
+    map<pair<int, int>, pair<bool, bool>> found;
     int dx[4] = {1, 0, -1, 0};
     int dy[4] = {0, 1, 0, -1};
 public:
-    bool out(int r, int c) {
+    inline bool out(int r, int c) {
         return (r < 0 or c < 0 or r >= R or c >= C);
     }
     
-    bool inpacific(int r, int c) {
+    inline bool inpacific(int r, int c) {
         return ((r < 0) or (c < 0 and r < R));
     }
     
-    bool inatlantic(int r, int c) {
+    inline bool inatlantic(int r, int c) {
         return ((r >= R) or (c >= C and r >= 0));
     }
     
@@ -28,10 +28,10 @@ public:
             
             int row = p.first, col = p.second;
             
-            if (found.count(p) and found[p]) {
-                pacific = atlantic = true;
-                return;
-            }
+            if (found.count(p)) {
+                pacific |= found[p].first;
+                atlantic |= found[p].second;
+            }   
             
             if (inpacific(row, col)) {
                 pacific = true;
@@ -71,8 +71,10 @@ public:
                 pacific = atlantic = false;
                 bfs(i, j, heights);
                 
+                pair<int, int> p = {i, j};
+                found[p] = {false, false};
                 if (pacific and atlantic) {
-                    found[{i, j}] = true;
+                    found[p] = {true, true};
                     ans.push_back({i, j});
                 }
             }
