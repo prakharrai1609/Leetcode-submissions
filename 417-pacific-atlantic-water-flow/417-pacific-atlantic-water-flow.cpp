@@ -28,7 +28,7 @@ public:
             
             int row = p.first, col = p.second;
             
-            if (found[p]) {
+            if (found.count(p) and found[p]) {
                 pacific = atlantic = true;
                 return;
             }
