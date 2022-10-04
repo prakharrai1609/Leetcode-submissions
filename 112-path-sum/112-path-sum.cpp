@@ -10,29 +10,21 @@
  * };
  */
 class Solution {
-    int sum = 0;
-    bool ans = false;
 public:
-    bool leaf(TreeNode* root) {
-        return (!root->left and !root->right);    
-    }
-    
-    void preorder(TreeNode* root, int target) {
-        if (!root) return;
+    bool path_sum(TreeNode* root, int target) {
+        if (!root)
+            return false;
         
-        if (leaf(root) and sum + root->val == target) {
-            ans = true;
-            return;
-        }
+        if (!root->left and !root->right)
+            return target == root->val;
         
-        sum += root->val;
-        preorder(root->left, target);
-        preorder(root->right, target);
-        sum -= root->val;
+        bool op1 = path_sum(root->left, target - root->val);
+        bool op2 = path_sum(root->right, target - root->val);
+
+        return (op1 or op2);
     }
     
     bool hasPathSum(TreeNode* root, int targetSum) {
-        preorder(root, targetSum);
-        return ans;
+        return path_sum(root, targetSum);
     }
 };
